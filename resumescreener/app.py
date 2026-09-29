@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 import joblib
 import numpy as np
 import pandas as pd
@@ -9,12 +10,14 @@ from utils import clean, extract_skills, read_file, SKILLS
 st.set_page_config(page_title="AI Resume Screener", page_icon="📄", layout="wide")
 
 @st.cache_resource
+BASE = Path(__file__).parent
+
 def load_artifacts():
-    tfidf = joblib.load("artifacts/tfidf.pkl")
-    clf = joblib.load("artifacts/clf.pkl")
-    db = pd.read_csv("artifacts/resumes.csv.gz")
+    tfidf = joblib.load(BASE / "artifacts" / "tfidf.pkl")
+    clf = joblib.load(BASE / "artifacts" / "clf.pkl")
+    db = pd.read_csv(BASE / "artifacts" / "resumes.csv.gz")
     db["clean"] = db["clean"].fillna("")
-    metrics = json.load(open("artifacts/metrics.json"))
+    metrics = json.load(open(BASE / "artifacts" / "metrics.json"))
     db_vecs = tfidf.transform(db["clean"])
     return tfidf, clf, db, db_vecs, metrics
 
