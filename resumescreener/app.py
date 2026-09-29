@@ -15,7 +15,7 @@ BASE = Path(__file__).parent
 def load_artifacts():
     tfidf = joblib.load(BASE / "artifacts" / "tfidf.pkl")
     clf = joblib.load(BASE / "artifacts" / "clf.pkl")
-    db = pd.read_csv(BASE / "artifacts" / "resumes.csv.gz")
+    db = pd.read_csv(BASE / "artifacts" / "resumes_db.csv")
     db["clean"] = db["clean"].fillna("")
     metrics = json.load(open(BASE / "artifacts" / "metrics.json"))
     db_vecs = tfidf.transform(db["clean"])
