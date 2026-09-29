@@ -9,9 +9,9 @@ from utils import clean, extract_skills, read_file, SKILLS
 
 st.set_page_config(page_title="AI Resume Screener", page_icon="📄", layout="wide")
 
-@st.cache_resource
 BASE = Path(__file__).parent
 
+@st.cache_resource
 def load_artifacts():
     tfidf = joblib.load(BASE / "artifacts" / "tfidf.pkl")
     clf = joblib.load(BASE / "artifacts" / "clf.pkl")
@@ -100,3 +100,40 @@ with tab1:
 
 # ---------- Tab 2: database search ----------
 with tab2:
+    cats = ["All"] + sorted(db["Category"].unique())
+    cat = st.selectbox("Filter by category", cats)
+    if st.button("Search database", type="primary", key="search_db"):
+        if not jd.strip():
+            st.warning("Please paste a job description first.")
+        else:
+            sub = db if cat == "All" else db[db["Category"] == cat]
+            sim, pct, final, matched, _ = rank(jd, sub["clean"].tolist(), required, w_text)
+            res = sub.assign(**{
+                "Text similarity %": (sim * 100).round(1),
+                "Skill match %": (pct * 100).round(1),
+                "Final score": (final * 100).round(1),
+                "Matched skills": [", ".join(m) for m in matched],
+            })
+            res = res[res["Final score"] >= min_score] \
+                .sort_values("Final score", ascending=False).head(int(top_n))
+            for _, r in res.iterrows():
+                with st.expander(f"ID {r['ID']} · {r['Category']} · score {r['Final score']}"):
+                    st.write(f"**Matched skills:** {r['Matched skills'] or '—'}")
+                    st.caption(r["preview"] + "...")
+            st.download_button("⬇️ Download results (CSV)",
+                               res.drop(columns=["clean"]).to_csv(index=False).encode(),
+                               "db_shortlist.csv", "text/csv")
+
+# ---------- Tab 3: model info ----------
+with tab3:
+    st.metric("Held-out classifier accuracy", f"{metrics['accuracy']*100:.1f}%")
+    rep = pd.DataFrame(metrics["report"]).T.drop(["accuracy"], errors="ignore")
+    st.dataframe(rep.round(2), use_container_width=True)
+    st.markdown("""
+**How scoring works:** Final score = *w* × TF-IDF cosine similarity between the JD and resume
++ (1 − *w*) × fraction of required skills found in the resume.
+
+**Limitations:** Scores reflect keyword and text overlap, not real candidate quality.
+Scanned (image-only) PDFs can't be read. Automated screening can reflect bias in its data,
+so a human should always review the shortlist.
+""")
