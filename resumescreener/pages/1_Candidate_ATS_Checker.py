@@ -5,6 +5,7 @@ from core import require, ats_report
 from utils import clean, extract_skills, read_file
 
 ui.style(top_nav=True, sidebar=False)
+ui.polish()
 user = require("candidate")
 ui.nav(user)
 ui.hero("Resume checker", "Upload your resume and get an ATS score with a clear list of fixes.")
