@@ -10,6 +10,7 @@ from utils import clean, extract_skills, read_file, SKILLS
 from core import require
 
 ui.style(top_nav=True)
+ui.polish()
 user = require("recruiter")
 ui.nav(user)
 ui.hero("Bulk resume screener", "Upload many resumes or search the database and get a ranked shortlist.")
