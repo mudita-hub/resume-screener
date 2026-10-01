@@ -5,6 +5,7 @@ from core import require, match
 from utils import clean, extract_skills, SKILLS
 
 ui.style(top_nav=True, sidebar=False)
+ui.polish()
 user = require("recruiter")
 ui.nav(user)
 ui.hero("Jobs and applicants", "Post jobs and review candidates ranked by match score.")
@@ -47,7 +48,7 @@ for j in my_jobs:
                 with c2:
                     ui.ring(m["score"], "match", 90)
                 with c3:
-                    new = c3.selectbox("Status", STATUSES, index=STATUSES.index(a["status"]),
+                    new = st.selectbox("Status", STATUSES, index=STATUSES.index(a["status"]),
                                        key=f"st_{a['app_id']}")
                     if new != a["status"]:
                         db.set_status(a["app_id"], new)
