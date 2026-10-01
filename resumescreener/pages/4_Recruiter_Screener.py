@@ -5,10 +5,14 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 from sklearn.metrics.pairwise import cosine_similarity
+import ui
 from utils import clean, extract_skills, read_file, SKILLS
 from core import require
 
-require("recruiter")
+ui.style(top_nav=True)
+user = require("recruiter")
+ui.nav(user)
+ui.hero("Bulk resume screener", "Upload many resumes or search the database and get a ranked shortlist.")
 
 BASE = Path(__file__).resolve().parents[1]
 
@@ -48,9 +52,7 @@ w_text = st.sidebar.slider("Weight: text similarity vs skill match", 0.0, 1.0, 0
 top_n = st.sidebar.number_input("Shortlist size", 1, 50, 10)
 min_score = st.sidebar.slider("Minimum final score (%)", 0, 100, 0)
 
-st.title("Recruiter Screener")
-
-jd = st.text_area("Paste the job description", height=180)
+jd = st.text_area("Paste the job description", height=160)
 jd_skills = extract_skills(clean(jd)) if jd else []
 required = st.multiselect("Required skills (auto-detected from the JD, edit freely)", SKILLS, default=jd_skills)
 
