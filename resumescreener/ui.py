@@ -13,14 +13,12 @@ header[data-testid="stHeader"] {background: transparent;}
 .hero .t {color: #fff; font-size: 2rem; font-weight: 800; line-height: 1.2;}
 .hero .s {color: #fff; opacity: .92; margin-top: 8px; font-size: 1.05rem;}
 .feat {display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; margin-bottom: 10px;
-       border-radius: 14px; border: 1px solid rgba(128,128,128,.28); background: rgba(128,128,128,.06);}
+       border-radius: 14px; border: 1px solid rgba(128,128,128,.28); background: #fff; color: #0f172a;}
 .feat .i {font-size: 1.5rem;}
-.feat .h {font-weight: 650;}
-.feat .d {opacity: .75; font-size: .9rem;}
+.feat .h {font-weight: 650; color: #0f172a;}
+.feat .d {opacity: .75; font-size: .9rem; color: #0f172a;}
 [data-testid="stMetric"] {border: 1px solid rgba(128,128,128,.25); border-radius: 14px;
                           padding: 12px 16px; background: rgba(128,128,128,.05);}
-[data-testid="stVerticalBlockBorderWrapper"] {border-radius: 16px;}
-.stButton > button, .stDownloadButton > button {border-radius: 10px; font-weight: 600;}
 .chip {display: inline-block; padding: 3px 11px; margin: 3px 5px 3px 0; border-radius: 99px;
        font-size: .78rem; font-weight: 500;}
 .chip.ok {background: rgba(22,163,74,.15); color: #16a34a; border: 1px solid rgba(22,163,74,.4);}
@@ -41,6 +39,61 @@ header[data-testid="stHeader"] {background: transparent;}
 </style>
 """
 
+POLISH = """
+<style>
+.stApp {background: linear-gradient(180deg, #f1efff 0%, #f8fafc 380px);}
+@keyframes shift {0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}}
+.hero, .hero2 {position: relative; overflow: hidden; border-radius: 24px; color: #fff;
+  background: linear-gradient(120deg, #312e81, #6d28d9, #db2777, #6d28d9);
+  background-size: 300% 300%; animation: shift 14s ease infinite;
+  box-shadow: 0 18px 40px rgba(79,70,229,.28);}
+.hero2 {padding: 40px 38px; margin: 6px 0 20px;}
+.hero::after, .hero2::after {content: ""; position: absolute; right: -60px; top: -60px; width: 240px;
+  height: 240px; border-radius: 50%; background: rgba(255,255,255,.10);}
+.hero2 .t {font-size: 2.6rem; font-weight: 800; line-height: 1.12; margin-top: 14px; color: #fff;}
+.hero2 .s {font-size: 1.1rem; opacity: .92; margin-top: 12px; max-width: 560px; color: #fff;}
+.hero2 .pill {display: inline-block; padding: 5px 14px; border-radius: 99px; font-size: .8rem;
+  font-weight: 600; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.35); color: #fff;}
+.fcard {background: #fff; border-radius: 18px; padding: 20px; height: 100%; color: #0f172a;
+  border: 1px solid rgba(99,102,241,.15); box-shadow: 0 4px 16px rgba(15,23,42,.05);
+  transition: transform .2s ease, box-shadow .2s ease;}
+.fcard:hover {transform: translateY(-4px); box-shadow: 0 14px 30px rgba(79,70,229,.18);}
+.fcard .ib {width: 46px; height: 46px; border-radius: 14px; display: flex; align-items: center;
+  justify-content: center; font-size: 1.4rem; margin-bottom: 12px;
+  background: linear-gradient(135deg, #e0e7ff, #fce7f3);}
+.fcard .h {font-weight: 700; font-size: 1.05rem; color: #0f172a;}
+.fcard .d {opacity: .72; font-size: .9rem; margin-top: 4px; color: #0f172a;}
+.stat {border-radius: 16px; padding: 18px 20px; background: #fff; color: #0f172a;
+  border: 1px solid rgba(99,102,241,.18); box-shadow: 0 2px 10px rgba(15,23,42,.04);}
+.stat .si {font-size: 1.5rem;}
+.stat .sv {font-size: 1.8rem; font-weight: 800; color: #4f46e5; line-height: 1.2;}
+.stat .sl {font-size: .85rem; opacity: .7; font-weight: 500; color: #0f172a;}
+.step {padding: 18px; border-radius: 16px; background: #eef2ff; height: 100%; color: #0f172a;}
+.step .n {display: inline-flex; width: 30px; height: 30px; border-radius: 50%;
+  background: #4f46e5; color: #fff; align-items: center; justify-content: center;
+  font-weight: 700; margin-bottom: 8px;}
+.step .h {font-weight: 700; color: #0f172a;}
+.step .d {opacity: .75; font-size: .9rem; margin-top: 2px; color: #0f172a;}
+.stButton > button[kind="primary"], .stDownloadButton > button[kind="primary"] {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed 60%, #db2777); border: none; color: #fff;
+  box-shadow: 0 6px 18px rgba(79,70,229,.32); padding: .55rem 1.1rem;}
+.stButton > button[kind="primary"]:hover {filter: brightness(1.08); transform: translateY(-1px);}
+.stButton > button {transition: all .15s ease; border-radius: 12px; font-weight: 600;}
+[data-baseweb="tab-list"] {gap: 6px;}
+[data-baseweb="tab"] {font-weight: 600; border-radius: 99px; padding: 6px 16px;}
+[data-baseweb="input"], [data-baseweb="textarea"], [data-baseweb="select"] > div {border-radius: 12px;}
+[data-testid="stVerticalBlockBorderWrapper"] {background: #fff; border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(15,23,42,.05); transition: box-shadow .2s ease;}
+[data-testid="stVerticalBlockBorderWrapper"]:hover {box-shadow: 0 12px 28px rgba(15,23,42,.10);}
+[data-testid="stPageLink"] a {border: 1px solid rgba(99,102,241,.25); border-radius: 12px;
+  background: #fff; transition: all .15s ease;}
+[data-testid="stPageLink"] a:hover {background: #eef2ff; border-color: #6366f1;}
+.sec {font-size: 1.5rem; font-weight: 800; margin: 28px 0 12px; color: #0f172a;}
+.foot {text-align: center; opacity: .55; font-size: .82rem; margin: 36px 0 8px;}
+@media (max-width: 640px) {.hero2 {padding: 26px 22px;} .hero2 .t {font-size: 1.7rem;}}
+</style>
+"""
+
 
 def style(top_nav=False, sidebar=True):
     st.markdown(CSS, unsafe_allow_html=True)
@@ -52,6 +105,10 @@ def style(top_nav=False, sidebar=True):
                   '[data-testid="collapsedControl"]{display:none;}')
     if extra:
         st.markdown(f"<style>{extra}</style>", unsafe_allow_html=True)
+
+
+def polish():
+    st.markdown(POLISH, unsafe_allow_html=True)
 
 
 def show(html):
@@ -66,10 +123,41 @@ def hero(title, subtitle):
     show(f'<div class="hero"><div class="t">{title}</div><div class="s">{subtitle}</div></div>')
 
 
+def hero2(badge, title, subtitle):
+    show(f'<div class="hero2"><span class="pill">{badge}</span>'
+         f'<div class="t">{title}</div><div class="s">{subtitle}</div></div>')
+
+
 def features(items):
     for icon, head, desc in items:
         show(f'<div class="feat"><div class="i">{icon}</div>'
              f'<div><div class="h">{head}</div><div class="d">{desc}</div></div></div>')
+
+
+def card(icon, head, desc):
+    show(f'<div class="fcard"><div class="ib">{icon}</div>'
+         f'<div class="h">{head}</div><div class="d">{desc}</div></div>')
+
+
+def section(text):
+    show(f'<div class="sec">{text}</div>')
+
+
+def stat(icon, label, value):
+    show(f'<div class="stat"><div class="si">{icon}</div>'
+         f'<div class="sv">{value}</div><div class="sl">{label}</div></div>')
+
+
+def steps(items):
+    cols = st.columns(len(items))
+    for i, (col, (head, desc)) in enumerate(zip(cols, items), 1):
+        col.markdown(f'<div class="step"><div class="n">{i}</div><div class="h">{head}</div>'
+                     f'<div class="d">{desc}</div></div>', unsafe_allow_html=True)
+
+
+def footer():
+    show('<div class="foot">Built with Streamlit, scikit-learn (TF-IDF + LinearSVC). '
+         'Scores are a guide, a human should make the final decision.</div>')
 
 
 def chips(items, kind="ok"):
