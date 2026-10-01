@@ -5,6 +5,7 @@ import ui
 from core import require, match
 
 ui.style(top_nav=True, sidebar=False)
+ui.polish()
 user = require("candidate")
 ui.nav(user)
 ui.hero("Jobs for you", "Ranked by how well your resume matches each role.")
