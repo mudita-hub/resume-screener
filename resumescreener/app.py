@@ -17,7 +17,7 @@ if not user:
                  "Check your resume, match with the right jobs and track every application in one place.")
         s1, s2, s3 = st.columns(3)
         with s1:
-            ui.stat("📄", "Resumes learned from", "2,484")
+            ui.stat("📄", "Resumes analysed", "2,484")
         with s2:
             ui.stat("🗂️", "Job categories", "24")
         with s3:
